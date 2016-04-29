@@ -17,3 +17,20 @@ fun SharedPreferences.getString(preferenceKey: String): String? {
         return null
     }
 }
+
+fun SharedPreferences.putInt(preferenceKey: String, preferenceValue: Int) {
+    edit().putInt(preferenceKey, preferenceValue).apply();
+}
+
+fun SharedPreferences.getInt(preferenceKey: String): Int? {
+    if (contains(preferenceKey)) {
+        return getInt(preferenceKey, 0)
+    } else {
+        return null
+    }
+}
+
+fun SharedPreferences.putBoolean(preferenceKey: String, preferenceValue: Boolean) {
+    edit().putBoolean(preferenceKey, preferenceValue).apply();
+}
+
