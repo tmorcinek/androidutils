@@ -32,6 +32,11 @@ abstract class AbstractRecyclerViewAdapter<T, H : RecyclerView.ViewHolder>(prote
         notifyItemRangeInserted(0, list.size)
     }
 
+    fun clearListAnimated() {
+        notifyItemRangeRemoved(0, itemCount)
+        items.clear()
+    }
+
     fun setList(list: List<T>) {
         items.clear()
         items.addAll(list)
