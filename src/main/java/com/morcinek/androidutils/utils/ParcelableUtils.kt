@@ -25,3 +25,8 @@ fun Parcel.readDate(): Date {
 }
 
 fun Parcel.writeDate(date: Date) = writeLong(date.time)
+
+fun Parcel.readInteger() = readValue(null) as Int?
+
+fun Parcel.writeBoolean(boolean: Boolean) = writeValue(boolean)
+fun Parcel.readBoolean() = readValue(null) as Boolean
