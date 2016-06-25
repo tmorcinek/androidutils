@@ -17,7 +17,7 @@ import android.view.ViewGroup
 val ViewGroup.firstChild: View
     get() = getChildAt(0)
 
-fun Activity.onUiThreadDelayed(f: () -> Unit, delay: Long) {
+fun Activity.onUiThreadDelayed(delay: Long, f: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed({
         if (!isFinishing) {
             f()
@@ -25,8 +25,8 @@ fun Activity.onUiThreadDelayed(f: () -> Unit, delay: Long) {
     }, delay)
 }
 
-fun Fragment.onUiThreadDelayed(f: () -> Unit, delay: Long) {
-    activity.onUiThreadDelayed (f, delay)
+fun Fragment.onUiThreadDelayed(delay: Long, f: () -> Unit) {
+    activity.onUiThreadDelayed (delay, f)
 }
 
 fun android.app.Fragment.setTitle(resourceId: Int) {
