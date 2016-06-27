@@ -36,6 +36,12 @@ inline fun <reified T : Activity> Fragment.startActivity(vararg params: Any) {
     AnkoInternals.internalStartActivity(context, T::class.java, arrayOfPairs)
 }
 
+inline fun <reified T : Activity> Activity.startActivityWithFlags(intentFlags: Int) {
+    startActivity(Intent(this, T::class.java).apply {
+        flags = intentFlags
+    })
+}
+
 inline fun <reified T : Activity> Activity.startActivityForResult(vararg params: Any) {
     val arrayOfPairs = params.map { Pair(it.javaClass.name, it) }.toTypedArray()
     AnkoInternals.internalStartActivityForResult(this, T::class.java, 0, arrayOfPairs)
