@@ -22,9 +22,25 @@ fun SharedPreferences.putInt(preferenceKey: String, preferenceValue: Int) {
     edit().putInt(preferenceKey, preferenceValue).apply();
 }
 
-fun SharedPreferences.getInt(preferenceKey: String): Int? {
+fun SharedPreferences.getInt(preferenceKey: String): Int {
+    return getInt(preferenceKey, 0)
+}
+
+fun SharedPreferences.getIntOrNull(preferenceKey: String): Int? {
     if (contains(preferenceKey)) {
         return getInt(preferenceKey, 0)
+    } else {
+        return null
+    }
+}
+
+fun SharedPreferences.putLong(preferenceKey: String, preferenceValue: Long) {
+    edit().putLong(preferenceKey, preferenceValue).commit()
+}
+
+fun SharedPreferences.getLong(preferenceKey: String): Long? {
+    if (contains(preferenceKey)) {
+        return getLong(preferenceKey, 0)
     } else {
         return null
     }
