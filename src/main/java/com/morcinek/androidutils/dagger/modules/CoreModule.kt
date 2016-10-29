@@ -16,12 +16,11 @@ class CoreModule(private val application: Application) {
 
     @Provides
     @Singleton
-    @ForApplication
-    fun provideApplicationContext(): Context {
+    fun provideContext(): Context {
         return application
     }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideSharedPreferences() = PreferenceManager.getDefaultSharedPreferences(application)
 }
