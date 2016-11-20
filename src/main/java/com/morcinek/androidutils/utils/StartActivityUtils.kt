@@ -41,19 +41,19 @@ inline fun <reified T : Activity> Fragment.startActivity(vararg params: Any) {
 
 fun prepareParams(params: Array<out Any>) = params.map { it as? Pair<String, out Any> ?: Pair(it.javaClass.name, it) }.toTypedArray()
 
-inline fun <reified T : Activity> Activity.startActivityForResultFun(function: (Intent) -> Void) {
+inline fun <reified T : Activity> Activity.startActivityForResultExt(function: Intent.() -> Any) {
     val intent = AnkoInternals.createIntent(this, T::class.java, emptyArray())
     function(intent)
     startActivityForResult(intent, 0)
 }
 
-inline fun <reified T : Activity> Fragment.startActivityFun(function: (Intent) -> Void) {
+inline fun <reified T : Activity> Fragment.startActivityExt(function: Intent.() -> Any) {
     val intent = AnkoInternals.createIntent(activity, T::class.java, emptyArray())
     function(intent)
     activity.startActivity(intent)
 }
 
-inline fun <reified T : Activity> Fragment.startActivityForResultFun(function: (Intent) -> Void) {
+inline fun <reified T : Activity> Fragment.startActivityForResultExt(function: Intent.() -> Any) {
     val intent = AnkoInternals.createIntent(activity, T::class.java, emptyArray())
     function(intent)
     activity.startActivityFromFragment(this, intent, 0)
