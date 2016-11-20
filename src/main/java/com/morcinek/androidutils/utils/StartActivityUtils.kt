@@ -27,17 +27,35 @@ inline fun <reified T : Activity> Context.startActivityWithFlags(intentFlags: In
 }
 
 inline fun <reified T : Activity> Activity.startActivityForResult(vararg params: Any) {
-    val arrayOfPairs = params.map { Pair(it.javaClass.name, it) }.toTypedArray()
-    AnkoInternals.internalStartActivityForResult(this, T::class.java, 0, arrayOfPairs)
+    AnkoInternals.internalStartActivityForResult(this, T::class.java, 0, prepareParams(params))
 }
 
 inline fun <reified T : Activity> Fragment.startActivityForResult(vararg params: Any) {
-    val arrayOfPairs = params.map { Pair(it.javaClass.name, it) }.toTypedArray()
-    val intent = AnkoInternals.createIntent(activity, T::class.java, arrayOfPairs)
+    val intent = AnkoInternals.createIntent(activity, T::class.java, prepareParams(params))
     activity.startActivityFromFragment(this, intent, 0)
 }
 
 inline fun <reified T : Activity> Fragment.startActivity(vararg params: Any) {
-    val arrayOfPairs = params.map { Pair(it.javaClass.name, it) }.toTypedArray()
-    AnkoInternals.internalStartActivity(context, T::class.java, arrayOfPairs)
+    AnkoInternals.internalStartActivity(context, T::class.java, prepareParams(params))
 }
+
+fun prepareParams(params: Array<out Any>) = params.map { it as? Pair<String, out Any> ?: Pair(it.javaClass.name, it) }.toTypedArray()
+
+inline fun <reified T : Activity> Activity.startActivityForResultFun(function: (Intent) -> Void) {
+    val intent = AnkoInternals.createIntent(this, T::class.java, emptyArray())
+    function(intent)
+    startActivityForResult(intent, 0)
+}
+
+inline fun <reified T : Activity> Fragment.startActivityFun(function: (Intent) -> Void) {
+    val intent = AnkoInternals.createIntent(activity, T::class.java, emptyArray())
+    function(intent)
+    activity.startActivity(intent)
+}
+
+inline fun <reified T : Activity> Fragment.startActivityForResultFun(function: (Intent) -> Void) {
+    val intent = AnkoInternals.createIntent(activity, T::class.java, emptyArray())
+    function(intent)
+    activity.startActivityFromFragment(this, intent, 0)
+}
+
