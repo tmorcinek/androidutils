@@ -22,7 +22,7 @@ abstract class AbstractRecyclerViewAdapter<T, H : RecyclerView.ViewHolder>(prote
         }
     }
 
-    inline fun setItemViewClickListener(crossinline function: (T, View) -> Unit) {
+    fun setItemViewClickListener(function: (T, View) -> Unit) {
         itemClickListener = object : OnItemClickListener<T> {
             override fun onItemClicked(item: T, view: View) {
                 function.invoke(item, view)
