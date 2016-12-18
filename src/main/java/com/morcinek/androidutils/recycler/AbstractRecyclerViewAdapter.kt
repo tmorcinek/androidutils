@@ -2,6 +2,7 @@ package com.morcinek.androidutils.recycler
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import java.util.*
 
 /**
@@ -15,7 +16,7 @@ abstract class AbstractRecyclerViewAdapter<T, H : RecyclerView.ViewHolder>(prote
 
     inline fun setItemClickListener(crossinline function: (T) -> Unit) {
         itemClickListener = object : OnItemClickListener<T> {
-            override fun onItemClicked(item: T) {
+            override fun onItemClicked(item: T, view: View) {
                 function.invoke(item)
             }
         }
@@ -47,12 +48,12 @@ abstract class AbstractRecyclerViewAdapter<T, H : RecyclerView.ViewHolder>(prote
         return items.size
     }
 
-    protected fun initializeOnClickListener(holder: H, item: T) {
-        holder.itemView.setOnClickListener { itemClickListener?.onItemClicked(item) }
+    protected fun initializeOnClickListener(holder: H, item: T, view: View) {
+        holder.itemView.setOnClickListener { itemClickListener?.onItemClicked(item, view) }
     }
 
     interface OnItemClickListener<T> {
 
-        fun onItemClicked(item: T)
+        fun onItemClicked(item: T, view: View)
     }
 }
