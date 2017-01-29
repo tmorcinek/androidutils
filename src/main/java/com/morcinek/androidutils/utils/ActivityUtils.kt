@@ -41,3 +41,5 @@ fun Activity.finishOk() {
     setResult(Activity.RESULT_OK, intent)
     finish()
 }
+
+fun Fragment.supportInvalidateOptionsMenu() = activity.supportInvalidateOptionsMenu()

@@ -14,3 +14,6 @@ inline fun <reified T : Serializable> Bundle.getSerializable(): T? = getSerializ
 
 fun <T : Parcelable> Bundle.putParcelable(value: T) = putParcelable(value.javaClass.getName(), value)
 fun <T : Serializable> Bundle.putSerializable(value: T) = putSerializable(value.javaClass.getName(), value)
+
+fun Bundle.getInt() = getInt(Int::class.java.name)
+fun Bundle.put(value: Int) = putInt(Int::class.java.name, value)
