@@ -1,6 +1,7 @@
 package com.morcinek.androidutils.utils
 
 import android.content.Intent
+import android.os.Bundle
 import android.os.Parcelable
 import java.io.Serializable
 
@@ -14,4 +15,6 @@ inline fun <reified T : Serializable> Intent.getSerializableExtra() = getSeriali
 
 fun <T : Parcelable> Intent.putParcelableExtra(value: T) = putExtra(value.javaClass.getName(), value)
 fun <T : Serializable> Intent.putSerializableExtra(value: T) = putExtra(value.javaClass.getName(), value)
-fun Intent.getStringExtra() = getStringExtra(String::class.java.name)
+
+fun Intent.getString() = getStringExtra(String::class.java.name)
+fun Intent.put(value: String) = putExtra(String::class.java.name, value)
