@@ -56,8 +56,10 @@ abstract class AbstractRecyclerViewAdapter<T, H : RecyclerView.ViewHolder>(prote
         return items.size
     }
 
-    protected fun initializeOnClickListener(holder: H, item: T, view: View) {
-        holder.itemView.setOnClickListener { itemClickListener?.onItemClicked(item, view) }
+    protected fun initializeOnClickListener(item: T, view: View) {
+        view.setOnClickListener {
+            itemClickListener?.onItemClicked(item, it)
+        }
     }
 
     interface OnItemClickListener<T> {
