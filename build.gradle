@@ -1,12 +1,18 @@
 buildscript {
-    ext.kotlin_version = '1.1.0'
+    ext.kotlin_version = '1.1.1'
 
     repositories {
         jcenter()
     }
     dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
 }
 
 apply plugin: 'com.android.library'
