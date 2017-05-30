@@ -47,6 +47,12 @@ inline fun <reified T : Activity> Activity.startActivityForResultExt(function: I
     startActivityForResult(intent, 0)
 }
 
+inline fun <reified T : Activity> Activity.startActivityForResult(requestCode: Int, function: Intent.() -> Any) {
+    val intent = AnkoInternals.createIntent(this, T::class.java, emptyArray())
+    function(intent)
+    startActivityForResult(intent, requestCode)
+}
+
 inline fun <reified T : Activity> Fragment.startActivityExt(function: Intent.() -> Any) {
     val intent = AnkoInternals.createIntent(activity, T::class.java, emptyArray())
     function(intent)
