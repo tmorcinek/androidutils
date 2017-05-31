@@ -9,6 +9,7 @@ import java.io.Serializable
  * Copyright 2016 Tomasz Morcinek. All rights reserved.
  */
 
+inline fun <reified T : Parcelable> Intent.hasParcelableExtra() = hasExtra(T::class.java.name)
 inline fun <reified T : Parcelable> Intent.getParcelableExtra() = getParcelableExtra<T>(T::class.java.name)
 
 inline fun <reified T : Serializable> Intent.getSerializableExtra() = getSerializableExtra(T::class.java.name) as T?
