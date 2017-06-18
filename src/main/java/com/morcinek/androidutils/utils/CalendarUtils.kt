@@ -37,11 +37,15 @@ fun Calendar.isSameWeek(otherDate: Calendar) = year == otherDate.year && weekOfY
 
 fun Calendar.plusDays(number: Int) = add(Calendar.DAY_OF_MONTH, number)
 
-fun Calendar.minusDays(number: Int) = add(Calendar.DAY_OF_MONTH, -number)
+fun Calendar.minusDays(number: Int) = plusDays(-number)
 
-fun Calendar.minusWeeks(number: Int) = add(Calendar.WEEK_OF_YEAR, -number)
+fun Calendar.plusWeeks(number: Int) = add(Calendar.WEEK_OF_YEAR, number)
 
-fun Calendar.minusMonth(number: Int) = add(Calendar.MONTH, -number)
+fun Calendar.minusWeeks(number: Int) = plusWeeks(-number)
+
+fun Calendar.plusMonth(number: Int) = add(Calendar.MONTH, number)
+
+fun Calendar.minusMonth(number: Int) = plusMonth(-number)
 
 fun Calendar.resetFirstDayOfWeek() = apply { dayOfWeek = Calendar.MONDAY }
 
@@ -62,11 +66,11 @@ fun Calendar.nextDay(): Calendar {
     return day
 }
 
-class CalendarRange(val start: Calendar, val endInclusive: Calendar) : Iterable<Calendar> {
+class CalendarRange(override val start: Calendar, override val endInclusive: Calendar) : Iterable<Calendar>, ClosedRange<Calendar> {
 
     override fun iterator(): Iterator<Calendar> = CalendarIterator(this)
 
-    operator fun contains(date: Calendar): Boolean = date > start && date < endInclusive
+    override operator fun contains(date: Calendar): Boolean = date >= start && date < endInclusive
 }
 
 class CalendarIterator(val range: CalendarRange) : Iterator<Calendar> {
@@ -74,8 +78,9 @@ class CalendarIterator(val range: CalendarRange) : Iterator<Calendar> {
     var currentDate: Calendar = range.start
 
     override fun next(): Calendar {
+        val day = currentDate
         currentDate = currentDate.nextDay()
-        return currentDate
+        return day
     }
 
     override fun hasNext() = currentDate.nextDay() in range
