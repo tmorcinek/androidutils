@@ -7,7 +7,7 @@ import android.content.SharedPreferences
  */
 
 fun SharedPreferences.putString(preferenceKey: String, preferenceValue: String) {
-    edit().putString(preferenceKey, preferenceValue).apply();
+    edit().putString(preferenceKey, preferenceValue).commit()
 }
 
 fun SharedPreferences.getString(preferenceKey: String): String? {
@@ -19,7 +19,7 @@ fun SharedPreferences.getString(preferenceKey: String): String? {
 }
 
 fun SharedPreferences.putInt(preferenceKey: String, preferenceValue: Int) {
-    edit().putInt(preferenceKey, preferenceValue).apply();
+    edit().putInt(preferenceKey, preferenceValue).commit()
 }
 
 fun SharedPreferences.getInt(preferenceKey: String): Int {
@@ -47,6 +47,10 @@ fun SharedPreferences.getLong(preferenceKey: String): Long? {
 }
 
 fun SharedPreferences.putBoolean(preferenceKey: String, preferenceValue: Boolean) {
-    edit().putBoolean(preferenceKey, preferenceValue).apply();
+    edit().putBoolean(preferenceKey, preferenceValue).commit()
+}
+
+fun SharedPreferences.clear() {
+    edit().clear().commit()
 }
 
