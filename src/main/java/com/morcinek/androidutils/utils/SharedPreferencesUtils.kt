@@ -1,6 +1,7 @@
 package com.morcinek.androidutils.utils
 
 import android.content.SharedPreferences
+import java.util.*
 
 /**
  * Copyright 2016 Tomasz Morcinek. All rights reserved.
@@ -53,4 +54,7 @@ fun SharedPreferences.putBoolean(preferenceKey: String, preferenceValue: Boolean
 fun SharedPreferences.clear() {
     edit().clear().commit()
 }
+
+fun SharedPreferences.putCalendarEdit(key: String, calendar: Calendar) = edit().putLong(key, calendar.timeInMillis)
+fun SharedPreferences.getCalendar(key: String) = Calendar.getInstance().apply { timeInMillis = getLong(key, 0) }
 

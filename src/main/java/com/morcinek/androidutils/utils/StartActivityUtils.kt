@@ -20,6 +20,10 @@ fun Context.startActionViewActivity(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }
 
+fun Context.startActionViewActivity(urlRes: Int) {
+    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(urlRes))))
+}
+
 inline fun <reified T : Activity> Context.startActivityWithFlags(intentFlags: Int) {
     startActivity(Intent(this, T::class.java).apply {
         flags = intentFlags
