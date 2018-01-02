@@ -70,7 +70,7 @@ class CalendarRange(override val start: Calendar, override val endInclusive: Cal
 
     override fun iterator(): Iterator<Calendar> = CalendarIterator(this)
 
-    override operator fun contains(date: Calendar): Boolean = date >= start && date < endInclusive
+    override operator fun contains(date: Calendar): Boolean = date >= start && date <= endInclusive
 }
 
 class CalendarIterator(val range: CalendarRange) : Iterator<Calendar> {
