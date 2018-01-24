@@ -35,7 +35,7 @@ fun Calendar.isSameDay(otherDate: Calendar) = year == otherDate.year && dayOfYea
 
 fun Calendar.isSameWeek(otherDate: Calendar) = year == otherDate.year && weekOfYear == otherDate.weekOfYear
 
-fun Calendar.plusDays(number: Int) = add(Calendar.DAY_OF_MONTH, number)
+fun Calendar.plusDays(number: Int) = add(Calendar.DAY_OF_YEAR, number)
 
 fun Calendar.minusDays(number: Int) = plusDays(-number)
 

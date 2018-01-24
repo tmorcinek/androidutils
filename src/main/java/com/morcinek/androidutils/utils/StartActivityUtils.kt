@@ -75,7 +75,7 @@ inline fun <reified T : Activity> Activity.startActivityForResultFun(requestCode
     startActivityForResult(intent, requestCode)
 }
 
-inline fun <reified T : Activity> Activity.startActivityFun(function: Intent.() -> Any) {
+inline fun <reified T : Activity> Context.startActivityFun(function: Intent.() -> Any) {
     val intent = AnkoInternals.createIntent(this, T::class.java, emptyArray())
     function(intent)
     startActivity(intent)
