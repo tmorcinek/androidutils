@@ -15,8 +15,9 @@ val Calendar.month: Int
 val Calendar.year: Int
     get() = get(Calendar.YEAR)
 
-val Calendar.dayOfYear: Int
+var Calendar.dayOfYear: Int
     get() = get(Calendar.DAY_OF_YEAR)
+    set(value) = set(Calendar.DAY_OF_YEAR, value)
 
 val Calendar.weekOfYear: Int
     get() = get(Calendar.WEEK_OF_YEAR)
@@ -46,6 +47,10 @@ fun Calendar.minusWeeks(number: Int) = plusWeeks(-number)
 fun Calendar.plusMonth(number: Int) = add(Calendar.MONTH, number)
 
 fun Calendar.minusMonth(number: Int) = plusMonth(-number)
+
+fun Calendar.plusYears(number: Int) = add(Calendar.YEAR, number)
+
+fun Calendar.minusYears(number: Int) = plusYears(-number)
 
 fun Calendar.resetFirstDayOfWeek() = apply { dayOfWeek = Calendar.MONDAY }
 
