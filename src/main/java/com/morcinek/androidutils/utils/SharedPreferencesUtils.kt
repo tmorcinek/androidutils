@@ -23,9 +23,7 @@ fun SharedPreferences.putInt(preferenceKey: String, preferenceValue: Int) {
     edit().putInt(preferenceKey, preferenceValue).commit()
 }
 
-fun SharedPreferences.getInt(preferenceKey: String): Int {
-    return getInt(preferenceKey, 0)
-}
+fun SharedPreferences.getInt(preferenceKey: String) = getInt(preferenceKey, 0)
 
 fun SharedPreferences.getIntOrNull(preferenceKey: String): Int? {
     if (contains(preferenceKey)) {
